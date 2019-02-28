@@ -1,0 +1,65 @@
+
+ICS525-01 frequency calculator results
+	
+Results for: 
+desired input frequency =  17.734470 MHz 
+desired output frequency =   7.882000 MHz 
+desired output frequency accuracy = 100.00  ppm 
+desired duty cycle restriction = 45% - 55%
+Vdd= 5V  
+operating temperature = 0 to 70 deg C 
+
+Solutions for the ICS525-01:
+
+                Out freq    ppmerror VCOdiv  refdiv  VDW  RDW  OD  DutyCycle
+                --------   --------- ------  ------  ---  ---  --  ---------
+best accuracy    7.881987    -1.7    60       27      52   25  10  45% - 55% 
+lowest jitter    7.881987    -1.7    20        9      12    7  10  45% - 55% 
+lowest Idd       7.881987    -1.7    16       18       8   16   4  45% - 55% 
+
+Set the input pins on the ICS525-01 according to this table:
+
+                                       S2 S1 S0 R6 R5 R4 R3 R2 R1 R0 V8 V7 V6 V5 V4 V3 V2 V1 V0 
+               Out freq   ppmerror Pin: 5  4  3  2  1 28 27 26 25 24 18 17 16 15 14 13 12 11 10 
+               --------   --------     -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+best accuracy   7.881987   -1.7         0  0  0  0  0  1  1  0  0  1  0  0  0  1  1  0  1  0  0
+lowest jitter   7.881987   -1.7         0  0  0  0  0  0  0  1  1  1  0  0  0  0  0  1  1  0  0
+lowest Idd      7.881987   -1.7         0  1  1  0  0  1  0  0  0  0  0  0  0  0  0  1  0  0  0
+
+ICS525-02 frequency calculator results
+	
+Results for: 
+desired input frequency =  17.734470 MHz 
+desired output frequency =   7.882000 MHz 
+desired output frequency accuracy = 100.00  ppm 
+desired duty cycle restriction = 45% - 55%
+Vdd= 5V  
+operating temperature = 0 to 70 deg C 
+
+Solutions for the ICS525-02:
+
+                Out freq    ppmerror VCOdiv  refdiv  VDW  RDW  OD  DutyCycle
+                --------   --------- ------  ------  ---  ---  --  ---------
+best accuracy    7.881987    -1.7    44       33      36   31   6  45% - 55% 
+lowest jitter    7.881987    -1.7     8        6       0    4   6  45% - 55% 
+lowest Idd       7.881987    -1.7     8        9       0    7   4  45% - 55% 
+
+Set the input pins on the ICS525-02 according to this table:
+
+                                       S2 S1 S0 R6 R5 R4 R3 R2 R1 R0 V8 V7 V6 V5 V4 V3 V2 V1 V0 
+               Out freq   ppmerror Pin: 5  4  3  2  1 28 27 26 25 24 18 17 16 15 14 13 12 11 10 
+               --------   --------     -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+best accuracy   7.881987   -1.7         0  0  0  0  0  1  1  1  1  1  0  0  0  1  0  0  1  0  0
+lowest jitter   7.881987   -1.7         0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0  0  0  0
+lowest Idd      7.881987   -1.7         0  1  1  0  0  0  0  1  1  1  0  0  0  0  0  0  0  0  0
+
+
+Choosing Between the ICS525-01 and ICS525-02:
+The differences between the ICS525-01 and -02 are primarily
+cost and performance. The -01 is the lower cost part ; the -02 the higher
+performance.
+The ICS525-02 will operate to higher frequencies and typically has one third
+lower jitter than the -01 at 3.3V.
+If this calculator produces acceptable solutions for both the -01 and -02,
+then the choice is based on price/performance. Where low cost is critical,
+use the -01 and where lower jitter is required, use the -02.
