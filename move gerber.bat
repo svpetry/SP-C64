@@ -1,0 +1,11 @@
+move C64*.dri Gerber
+move C64*.gbl Gerber
+move C64*.gbo Gerber
+move C64*.gbs Gerber
+move C64*.gml Gerber
+move C64*.gpi Gerber
+move C64*.gtl Gerber
+move C64*.gto Gerber
+move C64*.gtp Gerber
+move C64*.gts Gerber
+move C64*.txt Gerber
