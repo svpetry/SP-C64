@@ -1,0 +1,6 @@
+multiplexed bus
+
+1. row, 2. column
+
+RAS active: A0..A7
+CAS active: A8..A15
