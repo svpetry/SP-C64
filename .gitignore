@@ -1,3 +1,6 @@
 ROMs/RomBuilder/.vs/
 ROMs/RomBuilder/RomBuilder/bin/
 ROMs/RomBuilder/RomBuilder/obj/
+Gerber/
+Logic Analyzer/CPU_VIC.sr
+Games/
