@@ -1,0 +1,109 @@
+AEC
+0: address and data bus used by VIC
+1: address and data bus used by CPU
+
+CAEC
+
+/IRQ
+CPU interrupt
+
+/BA
+bus available
+0: bus used by VIC
+1: bus used by CPU in second clock phase (PHI2 high)
+
+/CAS
+column address strobe
+
+/RAS
+row address strobe
+
+/DMA
+direct memory access, used by cartridge
+
+PHI0
+system clock
+
+PHI2
+shifted system clock by CPU
+
+R/W
+This signal flags a read (R/W high) or write (R/W low) access.
+
+RDY
+CPU ready
+0: stop CPU bus access
+1: CPU can access bus
+
+/RESET
+system reset (active = low)
+
+/LORAM
+mapping line from CPU P0
+
+/HIRAM
+mapping line from CPU P1
+
+/CHAREN
+mapping line from CPU P2
+
+/NMI
+non maskable interrupt
+
+LP
+light pen input
+
+P0-P5
+This is the built-in 6 bit I/O port.
+
+/VA14
+
+/VA15
+
+/EXROM
+expansion port
+
+/GAME
+expansion port
+
+VA13 = MA5
+VIC address line 13 = multiplexed address line 5
+
+VA12 = MA4
+VIC address line 12 = multiplexed address line 4
+
+/CASRAM
+RAM CAS line
+
+/BASIC
+BASIC chip select
+
+/KERNAL
+KERNAL chip select
+
+/CHAROM
+CHARACTER ROM chip select
+
+GR/W
+color ram R/W line
+
+I/O
+chip I/O select line
+
+/ROML
+expansion port rom select line 8000-9FFF
+
+/ROMH
+expansion port rom select line E000-FFFF
+
+/CIA1
+CIA1 chip select
+
+/CIA2
+CIA2 chip select
+
+I/O1
+expansion port I/O
+
+I/O2
+expansion port I/O
