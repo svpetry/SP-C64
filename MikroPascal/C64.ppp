@@ -33,13 +33,14 @@ SimDebug=0
 Count=0
 [OtherFiles]
 Count=2
-Value0=PIC\C64.ppas
-Value1=Keyboard.ppas
+Value0=Keyboard.ppas
+Value1=C:\Users\svpet\Google Drive\Elektronik\Projects\SP-C64\MikroPascal\C64.ppas
 [TabIndex]
 Value=1
 [SearchPath]
-Count=2
+Count=3
 Value0=C:\Program Files (x86)\Mikroelektronika\mikroPascal\Defs\
 Value1=C:\Program Files (x86)\Mikroelektronika\mikroPascal\Uses\p18\
+Value2=C:\Users\svpet\Google Drive\Elektronik\Projects\SP-C64\MikroPascal\
 [EEPROMinfo]
 isused=0

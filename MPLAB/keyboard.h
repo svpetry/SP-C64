@@ -10,6 +10,13 @@
     
 void InitKeyboard(void);
 unsigned char KeybGetScancode(unsigned char *key);
+void KeybGetC64Key(void);
+
+unsigned char keyb_shift_lock;
+unsigned char restore;
+unsigned char c64key;
+unsigned char key_break;
+unsigned char key_shift;
 
 #endif	/* KEYBOARD_H */
 

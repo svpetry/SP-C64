@@ -76,12 +76,12 @@
 #include <pic18f1220.h>
 #include <plib/xlcd.h>
 
-#define RS RB2
-#define EN RB3
-#define D4 RB4
-#define D5 RB5
-#define D6 RB6
-#define D7 RB7
+#define RS PORTBbits.RB2
+#define EN PORTBbits.RB3
+#define D4 PORTBbits.RB4
+#define D5 PORTBbits.RB5
+#define D6 PORTBbits.RB6
+#define D7 PORTBbits.RB7
 
 #include "lcd.h"
 #include "keyboard.h"
@@ -89,7 +89,9 @@
 #define TIMER_HI 0xCF; // 40 MHz
 #define TIMER_LO 0x2C; // 40 MHz
 
-void __interrupt () Isr (void) {
+unsigned char shiftlock_active;
+
+void __interrupt () Isr () {
     TMR0H = TIMER_HI; // interrupt every 10 ms
     TMR0L = TIMER_LO;
 
@@ -101,7 +103,7 @@ void __interrupt () Isr (void) {
     INTCONbits.TMR0IF = 0;
 }
 
-void Initialize(void) {
+void Initialize() {
     
     ADCON0 = 0; // disable A/D converter
     ADCON1 = 0x0F;
@@ -129,7 +131,68 @@ void Initialize(void) {
     InitKeyboard();
 }
 
-void main(void) {
+void SetC64Key(unsigned char key, unsigned char state) {
+   unsigned char col, row, swaddr;
+   
+   col = key & 0x07;
+   row = (key & 0x70) >> 4;
+   swaddr = col + (row << 3);
+   LATB = swaddr | 0b01000000;
+   if (state > 0)
+       LATBbits.LB7 = 1;
+   LATBbits.LB6 = 0;
+   LATBbits.LB6 = 1;
+}
+
+void MainLoop() {
+    const unsigned char C64SpaceKey = 0x74;
+    const unsigned char C64LeftShiftKey = 0x17;
+    
+    unsigned char data;
+    
+    shiftlock_active = 0;
+    while (1) {
+        KeybGetC64Key();
+        
+        if (keyb_shift_lock == 1) {
+            if (c64key == C64LeftShiftKey)
+                c64key = 0xFF;
+            if (shiftlock_active == 0) {
+                SetC64Key(C64LeftShiftKey, 1);
+                shiftlock_active = 1;
+            }
+        }
+        else if (shiftlock_active == 1) {
+            SetC64Key(C64LeftShiftKey, 0);
+            shiftlock_active = 0;
+        }
+        
+        if (key_shift == 1 && shiftlock_active == 0) {
+            if (key_break == 1)
+                data = 0;
+            else
+                data = 1;
+            SetC64Key(C64LeftShiftKey, data);
+        }
+        
+        if (c64key != 0xFF) {
+            if (key_break == 1)
+                data = 0;
+            else
+                data = 1;
+            SetC64Key(c64key, data);
+        }
+        
+        if (restore == 1) {
+            LATAbits.LA3 = 0;
+            __delay_us(10);
+            LATAbits.LA3 = 1;
+            restore = 0;
+        }
+    }
+}
+
+void main() {
     
     Initialize();
     
@@ -147,6 +210,8 @@ void main(void) {
         LATAbits.LA6 = 1;
         __delay_ms(500);
     }
+    
+    MainLoop();
     
     return;
 }

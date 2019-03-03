@@ -9,12 +9,6 @@
 #define SHIFT_COL 1
 #define SHIFT_ROW 3
 
-unsigned char keyb_shift_lock;
-unsigned char restore;
-unsigned char c64key;
-unsigned char key_break;
-unsigned char key_shift;
-
 void InitKeyboard(void) {
     keyb_shift_lock = 0;
     restore = 0;

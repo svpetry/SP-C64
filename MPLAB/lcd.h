@@ -32,7 +32,7 @@ void Lcd_Cmd(char a)
         EN  = 0;             // => E = 0
 }
 
-Lcd_Clear()
+void Lcd_Clear()
 {
 	Lcd_Cmd(0);
 	Lcd_Cmd(1);
