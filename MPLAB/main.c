@@ -76,18 +76,18 @@
 #include <pic18f1220.h>
 #include <plib/xlcd.h>
 
-#define RS PORTBbits.RB2
-#define EN PORTBbits.RB3
-#define D4 PORTBbits.RB4
-#define D5 PORTBbits.RB5
-#define D6 PORTBbits.RB6
-#define D7 PORTBbits.RB7
+#define RS LATBbits.LB2
+#define EN LATBbits.LB3
+#define D4 LATBbits.LB4
+#define D5 LATBbits.LB5
+#define D6 LATBbits.LB6
+#define D7 LATBbits.LB7
 
 #include "lcd.h"
 #include "keyboard.h"
 
-#define TIMER_HI 0xCF; // 40 MHz
-#define TIMER_LO 0x2C; // 40 MHz
+#define TIMER_HI 0xCF // 40 MHz
+#define TIMER_LO 0x2C // 40 MHz
 
 unsigned char shiftlock_active;
 
@@ -204,6 +204,11 @@ void main() {
 
     T0CONbits.TMR0ON = 1; // Enable Timer0
 
+    Lcd_Init();
+    Lcd_Clear();
+    Lcd_Set_Cursor(1, 1);
+    Lcd_Write_String("Hello world");
+    
     while (1) {
         LATAbits.LA6 = 0;
         __delay_ms(500);
