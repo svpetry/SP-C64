@@ -25,7 +25,7 @@ begin
   key_shift := 0;
 end;
 (******************************************************************************)
-function KeybGetScancode(var c64key: byte): byte;
+function KeybGetScancode(var key: byte): byte;
 var
   i: word;
 
@@ -33,7 +33,7 @@ begin
   TRISA.1 := 1; // release clock line
   Delay_us(50);
 
-  c64key := 0;
+  key := 0;
 
   // read start bit
   i := 0;
@@ -53,8 +53,8 @@ begin
     begin
       while PORTA.1 = 1 do
         nop;
-      c64key := c64key shr 1;
-      c64key.7 := PORTA.0;
+      key := key shr 1;
+      key.7 := PORTA.0;
       while PORTA.1 = 0 do
         nop;
     end;
@@ -109,7 +109,7 @@ begin
     else
       break := 0;
 
-    if special then
+    if special = 1 then
     begin
       case scode of
         $12: begin // RESTORE (Pause/Break)
@@ -184,7 +184,7 @@ begin
         $5B: c64key := $61; // *
         $4C: c64key := $55; // [ :
         $52: c64key := $62; // ] ;
-        $42: c64key := $57; // ,
+        $41: c64key := $57; // ,
         $49: c64key := $54; // .
         $4A: c64key := $67; // /
 
