@@ -5,3 +5,7 @@ Gerber/
 Logic Analyzer/CPU_VIC.sr
 Games/
 Eagle Libs/
+MPLAB/build/
+MPLAB/dist/
+MPLAB/disassembly/
+MPLAB/nbproject/private/private.xml
