@@ -84,7 +84,7 @@ void Lcd_Write_Char(char a)
    temp = a&0x0F;
    y = a&0xF0;
    RS = 1;             // => RS = 1
-   Lcd_Port(y>>4);             //Data transfer
+   Lcd_Port(y>>4);     // Data transfer
    EN = 1;
    __delay_us(40);
    EN = 0;

@@ -2,9 +2,8 @@
 #include <xc.h>
 #include <pic18f1220.h>
 
-#define _XTAL_FREQ 40000000
-
 #include "keyboard.h"
+#include "base.h"
 
 #define SHIFT_COL 1
 #define SHIFT_ROW 3
