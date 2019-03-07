@@ -38,20 +38,20 @@ void Lcd_Clear()
 	Lcd_Cmd(1);
 }
 
-void Lcd_Set_Cursor(char a, char b)
+void Lcd_Set_Cursor(char row, char col)
 {
 	char temp, z, y;
-	if (a == 1)
+	if (row == 1)
 	{
-        temp = 0x80 + b - 1;
+        temp = 0x80 + col - 1;
 		z = temp>>4;
 		y = temp & 0x0F;
 		Lcd_Cmd(z);
 		Lcd_Cmd(y);
 	}
-	else if (a == 2)
+	else if (row == 2)
 	{
-		temp = 0xC0 + b - 1;
+		temp = 0xC0 + col - 1;
 		z = temp>>4;
 		y = temp & 0x0F;
 		Lcd_Cmd(z);
@@ -113,3 +113,6 @@ void Lcd_Shift_Left()
 	Lcd_Cmd(0x08);
 }
 
+void putch (char c) {
+    Lcd_Write_Char(c);
+}

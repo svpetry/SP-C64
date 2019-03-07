@@ -1,6 +1,7 @@
 
 #include <xc.h>
 #include <pic18f1220.h>
+#include <stdio.h>
 
 #include "keyboard.h"
 #include "base.h"
@@ -26,7 +27,7 @@ unsigned char KeybGetScancode(unsigned char *key) {
     
     // read start bit
     i = 0;
-    while (PORTAbits.RA1 == 1 && i < 20) {
+    while (PORTAbits.RA1 == 1 && i < 100) {
         __delay_us(10);
         i++;
     }
@@ -55,9 +56,12 @@ unsigned char KeybGetScancode(unsigned char *key) {
     }
     else
         result = 0;
-    
+        
     LATAbits.LA1 = 0; // pull clock line to 0
     TRISAbits.RA1 = 0; // clock line = output
+        
+    __delay_us(50);
+
     return result;
 }
 
@@ -65,6 +69,7 @@ void KeybGetC64Key(void) {
     unsigned char scode;
     unsigned char special;
     
+    key_shift = 0;
     c64key = 255;
     while (c64key == 255) {
         
@@ -74,14 +79,16 @@ void KeybGetC64Key(void) {
         // special key
         if (scode == 0xE0) {
             special = 1;
+            __delay_us(200);
             KeybGetScancode(&scode);
         }
         else
             special = 0;
         
         // break code
-        if (scode == 0x0F) {
+        if (scode == 0xF0) {
             key_break = 1;
+            __delay_us(200);
             KeybGetScancode(&scode);
         }
         else
@@ -91,7 +98,9 @@ void KeybGetC64Key(void) {
             switch (scode) {
                 case 0x12: // RESTORE (Pause/Break)
                     if (key_break == 1) {
+                        __delay_us(200);
                         KeybGetScancode(&scode);
+                        __delay_us(200);
                         KeybGetScancode(&scode);
                     }
                     else {
@@ -192,10 +201,10 @@ void KeybGetC64Key(void) {
                 case 0x22: // X
                     c64key = 0x27;
                     break;
-                case 0x1A: // Y
+                case 0x35: // Y
                     c64key = 0x31;
                     break;
-                case 0x35: // Z
+                case 0x1A: // Z
                     c64key = 0x14;
                     break;
                 case 0x45: // 0
@@ -289,8 +298,8 @@ void KeybGetC64Key(void) {
                     c64key = 0x06;
                     key_shift = 1;
                     break;
-                case 0x38:
-                    c64key = 0x03; // F7
+                case 0x83: // F7
+                    c64key = 0x03;
                     break;
                 case 0x0A: // F8
                     c64key = 0x03;
@@ -319,7 +328,7 @@ void KeybGetC64Key(void) {
                 case 0x0D:
                     c64key = 0x72;
                     break;
-                case 0x00: // ARROW UP (# on PS2 keyboard)
+                case 0x5D: // ARROW UP (# on PS2 keyboard)
                     c64key = 0x66;
                     break;
                 case 0x58:

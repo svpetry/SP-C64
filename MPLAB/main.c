@@ -28,6 +28,8 @@
 #include <xc.h>
 #include <pic18f1220.h>
 #include <plib/xlcd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "lcd.h"
 #include "keyboard.h"
@@ -78,19 +80,47 @@ void Initialize() {
 }
 
 void SetC64Key(unsigned char key, unsigned char state) {
-   unsigned char col, row, swaddr;
+    unsigned char col, row, swaddr;
    
-   col = key & 0x07;
-   row = (key & 0x70) >> 4;
-   swaddr = col + (row << 3);
-   LATB = swaddr | 0b01000000;
-   if (state > 0)
-       LATBbits.LB7 = 1;
-   LATBbits.LB6 = 0;
-   LATBbits.LB6 = 1;
+    col = (key & 0x70) >> 4;
+    row = key & 0x07;
+    swaddr = col + (row << 3);
+    LATB = swaddr | 0b01000000;
+    if (state > 0)
+        LATBbits.LB7 = 1;
+    LATBbits.LB6 = 0;
+    LATBbits.LB6 = 1;
+/*   
+    if (state == 1)
+        Lcd_Set_Cursor(1, 1);
+    else
+        Lcd_Set_Cursor(2, 1);
+   
+    printf("col: %d row: %d  ", col, row);
+ */
 }
 
 void MainLoop() {
+ /*
+    unsigned char scode;
+    while (1) {
+        while (KeybGetScancode(&scode) == 0) ;
+                
+        Lcd_Set_Cursor(1, 1);
+        printf("%d ", scode);
+        while (KeybGetScancode(&scode) == 1)
+          printf("%d ", scode);
+                    
+        while (KeybGetScancode(&scode) == 0) ;
+       
+        Lcd_Set_Cursor(2, 1);
+        printf("%d ", scode);
+        while (KeybGetScancode(&scode) == 1)
+          printf("%d ", scode);
+
+    }
+*/
+
     const unsigned char C64SpaceKey = 0x74;
     const unsigned char C64LeftShiftKey = 0x17;
     
@@ -136,6 +166,7 @@ void MainLoop() {
             restore = 0;
         }
     }
+ 
 }
 
 void main() {
@@ -150,18 +181,10 @@ void main() {
 
     T0CONbits.TMR0ON = 1; // Enable Timer0
 
-    Lcd_Init();
-    Lcd_Clear();
-    Lcd_Set_Cursor(1, 1);
-    Lcd_Write_String("Hello world");
-    
-    while (1) {
-        LATAbits.LA6 = 0;
-        __delay_ms(500);
-        LATAbits.LA6 = 1;
-        __delay_ms(500);
-    }
-    
+//    Lcd_Init();
+//    Lcd_Clear();
+//    Lcd_Set_Cursor(1, 1);
+        
     MainLoop();
     
     return;
