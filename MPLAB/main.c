@@ -161,7 +161,7 @@ void MainLoop() {
         
         if (restore == 1) {
             LATAbits.LA3 = 0;
-            __delay_us(10);
+            __delay_us(100);
             LATAbits.LA3 = 1;
             restore = 0;
         }
