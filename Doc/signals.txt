@@ -7,7 +7,7 @@ CAEC
 /IRQ
 CPU interrupt
 
-/BA
+BA
 bus available
 0: bus used by VIC
 1: bus used by CPU in second clock phase (PHI2 high)
