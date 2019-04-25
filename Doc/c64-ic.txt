@@ -1,0 +1,124 @@
+                    C64 CHIPS and COMMON SYMPTOMS  
+              latest additions and corrections: 2-25-2017
+
+Note: there were at least five different motherboards made for the C64. 
+This composite list includes chips used in all board versions except the 
+latest C64C 250469 short board. See c64c-ic.txt for that information. 
+Note: not all chips are found in all board versions.
+
+U1 	906108-02 (6526) CIA 
+     Startup screen normal, but no cursor. No keyboard or control port
+access but cartridge works. Partial failure: some keys or joystick 
+positions don't work, one character appears ahead of startup cursor or
+random characters appear at startup. Blank screen if chip is shorted 
+(remove to check) and chip may get hot to the touch. 
+
+U2 	906108-02 (6526) CIA 
+     Startup screen normal. No serial or user port access. "File not
+found" error when drive accessed. Cartridge works. Characters may show 
+as blocks on startup screen. 
+
+U3 	901226-01 BASIC ROM 
+     Blank screen w/ border. Cartridge works. 
+
+U4	901227-03 (early -02) KERNAL ROM	
+     Blank screen, no border. Most cartridges don't work but a few game
+carts (example: CBM Kickman and Jupiter Lander) will work with a normal 
+screen because they bypass the Kernal ROM.
+
+U5	901225-01 CHARACTER ROM	
+     Normal startup border, but "garbage" characters where startup page
+characters should be. Cartridge works. 
+
+U6	2114 SRAM (COLOR RAM)
+     Startup screen shows flickering characters with shimmering colors. 
+Check also PLA U17.
+
+U7	906107-01 (6510) MPU
+     Blank screen, no border. Cartridge doesn't work.
+
+U8	7406 LOGIC CHIP
+     Blank screen. Partial failure: drive access problems: drive resets 
+but "device not present" error.
+
+U9 THRU U12 & U21 THRU U24  	8 RAM CHIPS (generic 4164 DRAM)
+          note: only 2 4464 RAM chips in later C64C boards
+     Blank screen, no border. Shorted chips will get warmer than the
+other RAM chips. Partial failure: will sometimes produce "garbage"
+screen, abnormal number of bytes free or "out of memory" error on
+startup screen.
+
+U13	74LS257APC or A or AN but not PC  (may be MOS7708) LOGIC
+     Blank screen, less than 38911 bytes free at startup or "garbage"
+screen. See U25  Note: MOS77xx series chips have a high failure rate.
+
+U14	74LS258	LOGIC  (may be MOS7709)
+     Blank or "garbage" screen, even with diagnostic cart. If IC is 
+MOS 77xx type, they are a frequent failure item! 
+
+U15	74LS139	LOGIC
+     Blank screen
+
+U16	CD4066 (generic CMOS quad bilateral switch)
+     Color problems such as random color "checkerboard" pattern on screen
+or no color. 
+
+U17	906114-01 (82S100PLA) PLA
+     Blank screen, no border. It can produce colored screen or flashing
+color garbage instead of startup screen. It can cause intermittant loss of
+cursor, screen freeze and/or program crashes after warmup and it can put
+random characters on screen. This chip normally runs hot. It is the most
+common chip to fail in the C64 because it runs hot normally, like the SID.
+
+U18  	906112-01 (6581) SID  Note: 8580 SID used in latest C64C
+     Normal screen. No sound or garbled sound. Mouse or graphics tablet
+pointer stuck or jitters. If shorted, can cause blank or "garbage" screen.
+NOTE: computer will work without a SID plugged in (unplug to check). This
+chip normally runs hot. Check also capacitor C13 (open).
+
+U19	906109-04 (6567) VIC (PAL version: 6569)	
+     Blank screen (may be light or dark) with no border. Sometimes will
+produce garbage or "checkerboard" screen, or screen that lacks contrast.
+If screen is blank or garbled from bad VIC, "blind" disk commands from
+keyboard may still work.
+
+U20	556 LOGIC, TIMER (generates computer and drive reset at powerup)
+     Blank screen. Computer will not reset, or RESTORE doesn't work. 
+     If disk drive is held in reset, check buffer transistor Q3 for shorts 
+     (later C64 boards only, early boards don't buffer reset line)
+
+U25	74LS257APC or AN or A but not PC  (alt MOS7708) LOGIC
+     Blank screen, "garbage" screen or less than 38911 bytes at startup. 
+See U13 Note: MOS77xx series chips have a high failure rate.
+
+U26	74LS373	LOGIC
+     Startup screen has normal border, but characters are scrambled.
+
+U27	74LS08 (or MOS7712) LOGIC
+     Normal startup border, but screen full (or nearly) of "garbage" 
+characters. 
+
+U28	CD4066 (generic CMOS quad bilateral switch)
+     Normal startup screen. Proportional mouse or graphics tablet
+doesn't work in one or both control (joystick) ports. 
+
+U29	74LS74 LOGIC, DIVIDER
+     Startup screen shows normal characters in multicolored "rainbow".
+
+U30   74LS193 LOGIC, COUNTER
+
+U31	74LS629N (w/ support logic) or 7701/8701  MASTER OSC.  
+     Blank white screen, no border. Normal "whine" in nearby AM radio
+will be missing if the oscillator is not running. Check also VIC U19
+
+U32	4044 CMOS LOGIC
+     No monitor picture, just diagonal lines on screen. 
+
+POWER PACK: 
+     Can produce many problems like blank screen (red LED on, dim, or off),
+program lock-up, "garbage" screen, hum bars moving on screen, hum in audio,
+several bad RAM or other chips, intermittant operation after warmup, etc.
+
+
+Ray Carlsen CET
+CARLSEN ELECTRONICS
