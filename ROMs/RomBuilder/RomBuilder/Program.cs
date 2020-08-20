@@ -11,10 +11,16 @@ namespace RomBuilder
         ///     001         0x2000      KERNAL 3
         ///     010         0x4000  
         ///     011         0x6000      CHAROM
+        ///     011         0x7000      CHAROM (mirrored)
         ///     100         0x8000      KERNAL 2
         ///     101         0xA000      KERNAL 1
         ///     110         0xC000      BASIC
-        ///     111         0xE000  
+        ///     111         0xE000
+        ///     
+        ///     C64 KERNAL ROM (8K) 0xE000-0xFFFF
+        ///     C64 BASIC ROM (8K)  0xA000-0xBFFF
+        ///     C64 CHAR ROM (4K)   0xD000-0xDFFF
+        ///     
         /// </summary>
 
         static void Main(string[] args)
@@ -27,7 +33,9 @@ namespace RomBuilder
             AddRom(rom, "CockroachROM.bin", 0x0000); // kernal 4
 
             AddRom(rom, "basic.901226-01.bin", 0xC000);
+
             AddRom(rom, "characters.901225-01.bin", 0x6000);
+            AddRom(rom, "characters.901225-01.bin", 0x7000);
 
             File.WriteAllBytes("ROM.bin", rom);
         }
