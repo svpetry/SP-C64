@@ -70,7 +70,7 @@ void Initialize() {
     TMR0H = TIMER_HI; // interrupt every 10 ms
     TMR0L = TIMER_LO;
 
-    TRISA = 0b00011001;
+    TRISA = 0b00001001;
     LATA = 0b00000000;
     TRISB = 0b00000000;
     LATB = 0;
@@ -173,10 +173,8 @@ void main() {
     
     Initialize();
     
-    // reset CPU
-    LATAbits.LA4 = 0;
-    TRISAbits.RA4 = 0;
-    __delay_ms(500);
+    // reset system
+    __delay_ms(1500);
     TRISAbits.RA4 = 1;
 
     T0CONbits.TMR0ON = 1; // Enable Timer0

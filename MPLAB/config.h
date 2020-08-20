@@ -11,7 +11,7 @@
 #pragma config IESO = OFF       // Internal External Switchover bit (Internal External Switchover mode disabled)
 
 // CONFIG2L
-#pragma config PWRT = ON        // Power-up Timer Enable bit (PWRT enabled)
+#pragma config PWRT = OFF       // Power-up Timer Enable bit (PWRT enabled)
 #pragma config BOR = OFF        // Brown-out Reset Enable bit (Brown-out Reset disabled)
 // BORV = No Setting
 
