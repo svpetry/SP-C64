@@ -3,6 +3,8 @@ AEC
 1: address and data bus used by CPU
 
 CAEC
+0: address and data bus used by VIC
+1: address and data bus used by CPU
 
 /IRQ
 CPU interrupt
