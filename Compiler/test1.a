@@ -1,0 +1,64 @@
+    *= $E000		
+	!to "test1.bin", plain
+    !cpu 6502
+
+    LDX #$FF
+    SEI
+    TXS
+    CLD
+
+    LDA #%00000111
+    STA $01 ;set port value
+    LDA #$FF
+    STA $00 ;set port data direction (0 = intput, 1 = output)
+    
+.mainloop
+    LDA #%00100111
+    STA $01
+
+    LDX #$FF
+.delay1
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    DEX
+    BNE .delay1
+
+    LDA #%00000111
+    STA $01
+
+    LDX #$FF
+.delay2
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    DEX
+    BNE .delay2
+
+    JMP .mainloop
+
+    *= $FFFA ;NMI vector
+    !by $00
+    !by $E0
+
+    *= $FFFC ;RESET vector
+    !by $00
+    !by $E0
+
+    *= $FFFE ;IRQ vector
+    !by $00
+    !by $E0

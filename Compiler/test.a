@@ -1,0 +1,91 @@
+    *= $A000		
+    !to "test.bin", plain
+    !cpu 6502
+
+    !by $00
+    !by $A1
+    !by $00
+    !by $A1
+
+    *= $A100
+
+    SEI
+
+    ; fill first 3 lines of screen with 'A'
+    LDA #$01
+    LDX #120
+    LDY #$00
+.loop
+    STA $0400, Y
+    INY
+    DEX
+    BNE .loop
+
+    LDA #%00000011
+    STA $01 ; enable CHAROM CPU read
+
+    ; check memory
+    LDA #$01
+    LDX #120
+    LDY #$00
+.checkloop
+    CMP $0400, Y
+    BNE .error
+    INY
+    DEX
+    BNE .checkloop
+    JMP .blink
+
+.error
+    LDA #%00100111
+    STA $01
+    JSR .delay
+
+    LDA #%00000111
+    STA $01
+    JSR .delay
+
+    JMP .error
+
+
+.blink
+    LDA #%00100111
+    STA $01
+    JSR .delay
+    JSR .delay
+    JSR .delay
+    JSR .delay
+
+    LDA #%00000111
+    STA $01
+    JSR .delay
+    JSR .delay
+    JSR .delay
+    JSR .delay
+
+    JMP .blink
+
+.delay
+
+    LDY #$10
+.delay1
+
+    LDX #$FF
+.delay2
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    DEX
+    BNE .delay2
+
+    DEY
+    BNE .delay1
+
+    RTS

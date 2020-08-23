@@ -1,0 +1,58 @@
+    *= $E000		
+	!to "test.bin", plain
+    !cpu 6502
+
+    LDX #$FF
+    SEI
+    TXS
+    CLD
+
+    LDA #%00000111
+    STA $01 ;set port value
+    LDA #$FF
+    STA $00 ;set port data direction (0 = intput, 1 = output)
+    
+    ; write memory
+    LDA #$FF
+    TAY
+    LDX #$00
+.loop1
+    TXA
+    STA $4000, X
+    INX
+    DEY
+    BNE .loop1
+
+    ; read memory
+    LDA #$FF
+    TAY
+    LDX #$00
+.loop2
+    TXA
+    CMP $4000, X
+    BNE .error
+    INX
+    DEY
+    BNE .loop2
+
+.okloop
+    LDA #%00011111
+    STA $01 ;set port value
+    JMP .okloop
+
+.error    
+    LDA #%00111111
+    STA $01 ;set port value
+    JMP .error
+
+    *= $FFFA ;NMI vector
+    !by $00
+    !by $E0
+
+    *= $FFFC ;RESET vector
+    !by $00
+    !by $E0
+
+    *= $FFFE ;IRQ vector
+    !by $00
+    !by $E0
