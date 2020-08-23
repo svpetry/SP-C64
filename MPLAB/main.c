@@ -88,7 +88,9 @@ void SetC64Key(unsigned char key, unsigned char state) {
     LATB = swaddr | 0b01000000;
     if (state > 0)
         LATBbits.LB7 = 1;
+    NOP();
     LATBbits.LB6 = 0;
+    NOP();
     LATBbits.LB6 = 1;
 /*   
     if (state == 1)
@@ -99,10 +101,70 @@ void SetC64Key(unsigned char key, unsigned char state) {
     printf("col: %d row: %d  ", col, row);
  */
 }
+/*
+void print_c64key() {
+    SetC64Key(c64key, 1);
+    __delay_ms(50);
+    SetC64Key(c64key, 0);
+    __delay_ms(50);
+}
 
+void output_digit(unsigned char digit) {
+    switch (digit) {
+        case 0: // 0
+            c64key = 0x43;
+            break;
+        case 1: // 1
+            c64key = 0x70;
+            break;
+        case 2: // 2
+            c64key = 0x73;
+            break;
+        case 3: // 3
+            c64key = 0x10;
+            break;
+        case 4: // 4
+            c64key = 0x13;
+            break;
+        case 5: // 5
+            c64key = 0x20;
+            break;
+        case 6: // 6
+            c64key = 0x23;
+            break;
+        case 7: // 7
+            c64key = 0x30;
+            break;
+        case 8: // 8
+            c64key = 0x33;
+            break;
+        case 9: // 9
+            c64key = 0x40;
+            break;
+    }
+    print_c64key();
+}
+
+void output_num(unsigned char value) {
+    unsigned char d;
+    d = value / 100;
+    output_digit(d);
+    value -= d * 100;
+    
+    d = value / 10;
+    output_digit(d);
+    value -= d * 10;
+    
+    output_digit(value);
+    
+    c64key = 0x01; // RETURN
+    print_c64key();
+}
+*/
 void MainLoop() {
- /*
-    unsigned char scode;
+//    unsigned char scode;
+
+/*
     while (1) {
         while (KeybGetScancode(&scode) == 0) ;
                 
@@ -120,8 +182,13 @@ void MainLoop() {
 
     }
 */
-
-    const unsigned char C64SpaceKey = 0x74;
+/*  
+    while (1) {
+        while (KeybGetScancode(&scode) == 0) ;
+        output_num(scode);
+    }
+*/
+    //const unsigned char C64SpaceKey = 0x74;
     const unsigned char C64LeftShiftKey = 0x17;
     
     unsigned char data;
@@ -160,8 +227,11 @@ void MainLoop() {
         }
         
         if (restore == 1) {
+            //output_num(64);
             LATAbits.LA3 = 0;
-            __delay_us(100);
+            TRISAbits.RA3 = 0;
+            __delay_us(20);
+            TRISAbits.RA3 = 1;
             LATAbits.LA3 = 1;
             restore = 0;
         }

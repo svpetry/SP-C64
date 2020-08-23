@@ -60,7 +60,7 @@ unsigned char KeybGetScancode(unsigned char *key) {
     LATAbits.LA1 = 0; // pull clock line to 0
     TRISAbits.RA1 = 0; // clock line = output
         
-    __delay_us(50);
+    __delay_us(120);
 
     return result;
 }
@@ -77,7 +77,7 @@ void KeybGetC64Key(void) {
             return;
         
         // special key
-        if (scode == 0xE0) {
+        if (scode == 0xE0 || scode == 0xE1) {
             special = 1;
             __delay_us(200);
             KeybGetScancode(&scode);
@@ -96,18 +96,23 @@ void KeybGetC64Key(void) {
         
         if (special == 1) {
             switch (scode) {
-                case 0x12: // RESTORE (Pause/Break)
-                    if (key_break == 1) {
-                        __delay_us(200);
-                        KeybGetScancode(&scode);
-                        __delay_us(200);
-                        KeybGetScancode(&scode);
-                    }
-                    else {
-                        restore = 1;
-                        return;
-                    }
-                    break;
+                case 0x14: // RESTORE (Pause/Break)
+                    
+                    // Pause/Break has no break code.
+                    restore = 1;
+                    __delay_us(200);
+                    KeybGetScancode(&scode); // 0x77
+                    __delay_us(200);
+                    KeybGetScancode(&scode); // 0xE1
+                    __delay_us(200);
+                    KeybGetScancode(&scode); // 0xF0
+                    __delay_us(200);
+                    KeybGetScancode(&scode); // 0x14
+                    __delay_us(200);
+                    KeybGetScancode(&scode); // 0xF0
+                    __delay_us(200);
+                    KeybGetScancode(&scode); // 0x77
+                    return;
                 case 0x6C:
                     c64key = 0x63; // CLR/HOME
                     break;
@@ -163,7 +168,7 @@ void KeybGetC64Key(void) {
                     c64key = 0x45;
                     break;
                 case 0x4B: // L
-                    c64key = 0x53;
+                    c64key = 0x52;
                     break;
                 case 0x3A: // M
                     c64key = 0x44;
