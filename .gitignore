@@ -10,3 +10,4 @@ MPLAB/dist/
 MPLAB/disassembly/
 MPLAB/nbproject/private/private.xml
 Debug/
+Compiler/*.bin
