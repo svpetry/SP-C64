@@ -7,5 +7,5 @@ Features/changes:
 * PS/2 keyboard connector
 * VIC and SID voltage selectable by jumper
 * replaced all C64 ROM chips with one EEPROM
-* 4 ROM images selectable by switches
+* 4 kernal images selectable by switches
 * clock generation by ICS 525 clock chip
