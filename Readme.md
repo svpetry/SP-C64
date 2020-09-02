@@ -1,6 +1,6 @@
 This is a rebuild of the Commodore 64 using the original schematics.
 
-Features:
+Features/changes:
 * Replaced DRAM with 2 x 32K SRAM
 * Modulator with S-Video and Composite output
 * PLA replaced with EEPROM
