@@ -11,3 +11,5 @@ MPLAB/disassembly/
 MPLAB/nbproject/private/private.xml
 Debug/
 Compiler/*.bin
+*.b#*
+*.s#*
