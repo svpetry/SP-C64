@@ -1,3 +1,8 @@
+This was my first attempt to recreate the Commodore 64. I was able to get it more or less working, but the design still contains timing issues. Currently I am working on a C64 ATX board.
+Please not that the design is still buggy. If you are interested in my work then you should wait until I release my C64 ATX project which is currently under development.
+
+## Original text:
+
 This is a rebuild of the Commodore 64 using the original schematics.
 
 Features/changes:
