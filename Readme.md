@@ -1,6 +1,6 @@
 This was my first attempt to recreate the Commodore 64. I was able to get it more or less working, but the design still contains timing issues. Currently I am working on a C64 ATX board.
 
-Please note that this design is still buggy. If you are interested in my work then you should wait until I release my C64 ATX project which is currently under development.
+Please note that this design is still buggy. If you are interested in my work then you should wait until I release my C64 ATX project.
 
 ## Original text:
 
